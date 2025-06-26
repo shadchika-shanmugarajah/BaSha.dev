@@ -1,13 +1,177 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(240, 10%, 3.9%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 3.7%, 15.9%);
+  --muted-foreground: hsl(240, 5%, 64.9%);
+  --popover: hsl(240, 10%, 3.9%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 3.9%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 3.7%, 15.9%);
+  --input: hsl(240, 3.7%, 15.9%);
+  --primary: hsl(321, 100%, 50%);
+  --primary-foreground: hsl(240, 10%, 3.9%);
+  --secondary: hsl(240, 3.7%, 15.9%);
+  --secondary-foreground: hsl(0, 0%, 98%);
+  --accent: hsl(240, 3.7%, 15.9%);
+  --accent-foreground: hsl(0, 0%, 98%);
+  --destructive: hsl(0, 62.8%, 30.6%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 4.9%, 83.9%);
+  --radius: 0.5rem;
+  --pink-gradient-from: hsl(321, 100%, 50%);
+  --pink-gradient-to: hsl(270, 100%, 50%);
+  --purple-gradient-from: hsl(270, 100%, 50%);
+  --purple-gradient-to: hsl(240, 100%, 50%);
+  --blue-gradient-from: hsl(240, 100%, 50%);
+  --blue-gradient-to: hsl(200, 100%, 50%);
+  --dark-bg: hsl(240, 10%, 3.9%);
+  --dark-surface: hsl(240, 6%, 10%);
+  --dark-border: hsl(240, 3.7%, 15.9%);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.dark {
+  --background: hsl(222, 84%, 4.9%);
+  --foreground: hsl(210, 40%, 98%);
+  --muted: hsl(217, 32%, 17%);
+  --muted-foreground: hsl(215, 20%, 65%);
+  --popover: hsl(222, 84%, 4.9%);
+  --popover-foreground: hsl(210, 40%, 98%);
+  --card: hsl(222, 84%, 4.9%);
+  --card-foreground: hsl(210, 40%, 98%);
+  --border: hsl(217, 32%, 17%);
+  --input: hsl(217, 32%, 17%);
+  --primary: hsl(207, 90%, 54%);
+  --primary-foreground: hsl(222, 84%, 4.9%);
+  --secondary: hsl(217, 32%, 17%);
+  --secondary-foreground: hsl(210, 40%, 98%);
+  --accent: hsl(217, 32%, 17%);
+  --accent-foreground: hsl(210, 40%, 98%);
+  --destructive: hsl(0, 62%, 30%);
+  --destructive-foreground: hsl(210, 40%, 98%);
+  --ring: hsl(212, 32%, 44%);
+}
+
+@layer base {
+  body {
+    @apply bg-black text-white font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+  }
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out;
+  }
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+  .animate-float-delayed {
+    animation: float 3s ease-in-out infinite 2s;
+  }
+  .animate-float-delayed-more {
+    animation: float 3s ease-in-out infinite 4s;
+  }
+  .animate-pulse-ring {
+    animation: pulseRing 2s ease-out infinite;
+  }
+  .animate-rotate-slow {
+    animation: rotateSlow 20s linear infinite;
+  }
+  .animate-gradient {
+    animation: gradientShift 3s ease-in-out infinite;
+  }
+  .animate-profile-pop {
+    animation: profile-pop 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .text-gradient-pink {
+    background: linear-gradient(45deg, #ff0080, #8000ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .text-gradient-purple {
+    background: linear-gradient(45deg, #8000ff, #0080ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .border-gradient {
+    border: 2px solid transparent;
+    background: linear-gradient(45deg, #ff0080, #8000ff) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes pulseRing {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.7;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  @keyframes rotateSlow {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes gradientShift {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  @keyframes profile-pop {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
 }
