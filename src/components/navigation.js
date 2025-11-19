@@ -39,7 +39,7 @@ export default function Navigation() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex-shrink-0">
-            <span className="text-2xl font-bold text-pink-500">BaSha.dev</span>
+            <span className="text-2xl font-bold text-pink-500 hover:scale-110 transition-transform inline-block cursor-pointer">BaSha.dev</span>
           </div>
           <div className="hidden md:block">
             <div className="ml-10 flex items-baseline space-x-8">
@@ -47,9 +47,10 @@ export default function Navigation() {
                 <button
                   key={item.href}
                   onClick={() => handleNavClick(item.href)}
-                  className="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors cursor-pointer tracking-wider"
+                  className="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-all duration-300 cursor-pointer tracking-wider hover:scale-110 relative group"
                 >
                   {item.label}
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-pink-500 group-hover:w-full transition-all duration-300"></span>
                 </button>
               ))}
             </div>

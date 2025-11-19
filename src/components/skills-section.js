@@ -1,4 +1,5 @@
 import React from "react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 /*
   NOTE:
@@ -6,7 +7,33 @@ import React from "react";
   Make sure you have Font Awesome loaded in your project (via CDN or npm package).
 */
 
+function SkillCategory({ category, index }) {
+  const [categoryRef, categoryRevealed] = useScrollReveal({ threshold: 0.1 });
+  
+  return (
+    <div ref={categoryRef} className={`mb-8 scroll-reveal ${categoryRevealed ? 'revealed' : ''} stagger-${index + 1}`}>
+      <h3 className="text-xl sm:text-2xl font-bold text-white mb-6 text-center">
+        {category.title} <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">()</span>
+      </h3>
+      <div className={`bg-gradient-to-br ${category.gradient} p-4 sm:p-6 rounded-2xl border border-gray-800 hover:border-gray-700 transition-all duration-300`}>
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 sm:gap-4">
+          {category.skills.map((skill, skillIndex) => (
+            <div
+              key={skillIndex}
+              className="bg-gray-900/80 p-3 sm:p-4 rounded-xl hover:bg-gray-800/80 hover:scale-110 hover:shadow-lg hover:shadow-pink-500/20 transition-all duration-300 group cursor-default text-center"
+            >
+              <i className={`${skill.icon} ${skill.color} text-2xl sm:text-3xl mb-2 group-hover:scale-125 group-hover:rotate-12 transition-all duration-300`}></i>
+              <p className="text-white text-xs sm:text-sm font-medium">{skill.name}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function SkillsSection() {
+  const [titleRef, titleRevealed] = useScrollReveal({ threshold: 0.2 });
   const frontEndSkills = [
     { name: "HTML", icon: "fab fa-html5", color: "text-orange-500" },
     { name: "CSS", icon: "fab fa-css3-alt", color: "text-blue-500" },
@@ -66,9 +93,9 @@ export default function SkillsSection() {
   return (
     <section id="skills" className="py-20 bg-black">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div ref={titleRef} className={`text-center mb-16 scroll-reveal ${titleRevealed ? 'revealed' : ''}`}>
           <h2 className="text-4xl font-bold text-white mb-4">
-            Tech <span className="bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent">Stack</span> 🚀
+            Tech <span className="bg-gradient-to-r from-pink-500 to-purple-500 bg-clip-text text-transparent animate-gradient">Stack</span> 🚀
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
             Here are some of the technologies and tools I work with.
@@ -77,24 +104,7 @@ export default function SkillsSection() {
 
         <div className="grid lg:grid-cols-2 gap-8">
           {skillCategories.map((category, categoryIndex) => (
-            <div key={categoryIndex} className="mb-8">
-              <h3 className="text-xl sm:text-2xl font-bold text-white mb-6 text-center">
-                {category.title} <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">()</span>
-              </h3>
-              <div className={`bg-gradient-to-br ${category.gradient} p-4 sm:p-6 rounded-2xl border border-gray-800`}>
-                <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-3 sm:gap-4">
-                  {category.skills.map((skill, index) => (
-                    <div
-                      key={index}
-                      className="bg-gray-900/80 p-3 sm:p-4 rounded-xl hover:bg-gray-800/80 transition-all duration-300 group cursor-default text-center"
-                    >
-                      <i className={`${skill.icon} ${skill.color} text-2xl sm:text-3xl mb-2 group-hover:scale-110 transition-transform`}></i>
-                      <p className="text-white text-xs sm:text-sm font-medium">{skill.name}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <SkillCategory key={categoryIndex} category={category} index={categoryIndex} />
           ))}
         </div>
       </div>

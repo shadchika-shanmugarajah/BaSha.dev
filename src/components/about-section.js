@@ -1,12 +1,17 @@
+import { useScrollReveal } from "../hooks/useScrollReveal";
+
 export default function AboutSection() {
+  const [imageRef, imageRevealed] = useScrollReveal({ threshold: 0.2 });
+  const [contentRef, contentRevealed] = useScrollReveal({ threshold: 0.2 });
+
   return (
     <section id="about" className="py-20 bg-gray-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
         {/* Left side - Profile picture */}
-        <div className="flex justify-center lg:justify-start order-last lg:order-first">
+        <div ref={imageRef} className={`flex justify-center lg:justify-start order-last lg:order-first scroll-reveal-left ${imageRevealed ? 'revealed' : ''}`}>
           <div className="relative">
             {/* Profile picture container with fallback */}
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-lg overflow-hidden border-2 border-purple-500/30">
+            <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 rounded-lg overflow-hidden border-2 border-purple-500/30 hover:border-purple-500/60 transition-all duration-300">
               <div className="absolute inset-0 bg-gradient-to-br from-pink-500/10 via-purple-500/10 to-blue-500/10"></div>
               <div className="w-full h-full relative">
                 <img
@@ -53,10 +58,10 @@ export default function AboutSection() {
         </div>
 
         {/* Right side - About content */}
-        <div className="text-white text-center lg:text-left order-first lg:order-last">
+        <div ref={contentRef} className={`text-white text-center lg:text-left order-first lg:order-last scroll-reveal-right ${contentRevealed ? 'revealed' : ''}`}>
           <div className="mb-8">
             <h2 className="text-3xl sm:text-4xl font-bold mb-4">
-              <span className="text-pink-500">Hey there!</span> 👋
+              <span className="text-pink-500 animate-gradient">Hey there!</span> 👋
             </h2>
             <p className="text-gray-300 text-base sm:text-lg mb-6 leading-relaxed max-w-lg mx-auto lg:mx-0">
               I'm <span className="text-purple-400 font-semibold">Shadchika</span>, a full stack data engineer with a deep passion for software engineering and data-driven innovation. I love building seamless digital experiences that not only look great but also work efficiently behind the scenes.

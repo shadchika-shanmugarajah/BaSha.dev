@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { Send, Mail, MapPin, Phone } from "lucide-react";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 export default function ContactSection() {
+  const [titleRef, titleRevealed] = useScrollReveal({ threshold: 0.2 });
+  const [infoRef, infoRevealed] = useScrollReveal({ threshold: 0.2 });
+  const [formRef, formRevealed] = useScrollReveal({ threshold: 0.2 });
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -38,9 +42,9 @@ export default function ContactSection() {
   return (
     <section id="contact" className="py-20 bg-gray-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div ref={titleRef} className={`text-center mb-16 scroll-reveal ${titleRevealed ? 'revealed' : ''}`}>
           <h2 className="text-4xl font-bold text-white mb-4">
-            Get In <span className="text-pink-500">Touch</span>
+            Get In <span className="text-pink-500 animate-gradient">Touch</span>
           </h2>
           <p className="text-gray-300 text-lg max-w-2xl mx-auto">
             Ready to collaborate?<br />
@@ -50,7 +54,7 @@ export default function ContactSection() {
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Info */}
-          <div className="space-y-8">
+          <div ref={infoRef} className={`space-y-8 scroll-reveal-left ${infoRevealed ? 'revealed' : ''}`}>
             <div>
               <h3 className="text-2xl font-bold text-white mb-6">Let's Connect</h3>
               <p className="text-gray-300 mb-8 leading-relaxed">
@@ -60,8 +64,8 @@ export default function ContactSection() {
             </div>
 
             <div className="space-y-6">
-              <div className="flex items-center space-x-4">
-                <div className="bg-gradient-to-r from-pink-500 to-purple-600 p-3 rounded-lg">
+              <div className="flex items-center space-x-4 hover:scale-105 transition-transform">
+                <div className="bg-gradient-to-r from-pink-500 to-purple-600 p-3 rounded-lg hover:scale-110 transition-transform">
                   <Mail className="text-white" size={20} />
                 </div>
                 <div>
@@ -70,8 +74,8 @@ export default function ContactSection() {
                 </div>
               </div>
               
-              <div className="flex items-center space-x-4">
-                <div className="bg-gradient-to-r from-pink-500 to-purple-600 p-3 rounded-lg">
+              <div className="flex items-center space-x-4 hover:scale-105 transition-transform">
+                <div className="bg-gradient-to-r from-pink-500 to-purple-600 p-3 rounded-lg hover:scale-110 transition-transform">
                   <MapPin className="text-white" size={20} />
                 </div>
                 <div>
@@ -80,8 +84,8 @@ export default function ContactSection() {
                 </div>
               </div>
               
-              <div className="flex items-center space-x-4">
-                <div className="bg-gradient-to-r from-pink-500 to-purple-600 p-3 rounded-lg">
+              <div className="flex items-center space-x-4 hover:scale-105 transition-transform">
+                <div className="bg-gradient-to-r from-pink-500 to-purple-600 p-3 rounded-lg hover:scale-110 transition-transform">
                   <Phone className="text-white" size={20} />
                 </div>
                 <div>
@@ -93,7 +97,7 @@ export default function ContactSection() {
           </div>
 
           {/* Contact Form using Formspree */}
-          <div className="bg-gray-800 p-8 rounded-2xl border border-gray-700">
+          <div ref={formRef} className={`bg-gray-800 p-8 rounded-2xl border border-gray-700 hover:border-pink-500/50 transition-all duration-300 scroll-reveal-right ${formRevealed ? 'revealed' : ''}`}>
             <form
               action="https://formspree.io/f/mwpbwqgl"
               method="POST"

@@ -6,6 +6,7 @@ import ProjectsSection from "./components/projects-section";
 import CertificatesSection from "./components/certificates-section";
 import ContactSection from "./components/contact-section";
 import Footer from "./components/footer";
+import ChatBox from "./components/ChatBox";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <CertificatesSection />
       <ContactSection />
       <Footer />
+      <ChatBox />
     </div>
   );
 }
